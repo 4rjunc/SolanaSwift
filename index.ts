@@ -23,20 +23,6 @@ class SolanaWallet {
     this.keypair = Keypair.fromSecretKey(secretKey);
   }
 
-  async airDrop(amount: number): Promise<string> {
-    const signature = await this.connection.requestAirdrop(
-      this.keypair.publicKey,
-      LAMPORTS_PER_SOL
-    );
-    const { blockhash, lastValidBlockHeight } =
-      await this.connection.getLatestBlockhash();
-    await this.connection.confirmTransaction({
-      blockhash,
-      lastValidBlockHeight,
-      signature,
-    });
-  }
-
   async getBalance(): Promise<number> {
     const balance = await this.connection.getBalance(this.keypair.publicKey);
     return balance / LAMPORTS_PER_SOL;
