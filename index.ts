@@ -1,3 +1,5 @@
+#!/usr/bin/env ts-node
+
 import {
   Connection,
   PublicKey,
@@ -9,6 +11,7 @@ import {
 } from "@solana/web3.js";
 import { program } from "commander";
 import * as fs from "fs";
+import * as bip39 from "bip39";
 
 const SOLANA_NETWORK = "https://api.devnet.solana.com";
 
@@ -59,18 +62,30 @@ class SolanaWallet {
     await this.connection.confirmTransaction(signature);
     return signature;
   }
+
+  async getTransactionHistory(): Promise<any[]> {
+    const signatures = await this.connection.getSignaturesForAddress(
+      this.keypair.publicKey
+    );
+    const transactions = await Promise.all(
+      signatures.map((sig) => this.connection.getTransaction(sig.signature))
+    );
+    return transactions;
+  }
 }
 
 //Create a wallet -> the wallet details stored in wallet-secret.json 📂
 function createWallet(outputPath: string): void {
-  const newWallet = Keypair.generate();
-  const secretKey = Array.from(newWallet.secretKey);
+  const mnemonic = bip39.generateMnemonic();
+  const seed = bip39.mnemonicToSeedSync(mnemonic);
+  const keypair = Keypair.fromSeed(seed.slice(0, 32));
 
-  fs.writeFileSync(outputPath, JSON.stringify(secretKey));
+  fs.writeFileSync(outputPath, JSON.stringify(Array.from(keypair.secretKey)));
 
   console.log(`New wallet created successfully!`);
-  console.log(`Public key: ${newWallet.publicKey.toString()}`);
+  console.log(`Public key: ${keypair.publicKey.toString()}`);
   console.log(`Secret key saved to: ${outputPath}`);
+  console.log(`Mnemonic (keep this safe!): ${mnemonic}`);
 }
 
 program
@@ -82,6 +97,18 @@ program
   .description("Create a new wallet and save the secret key to a file")
   .action((outputPath = "wallet-secret.json") => {
     createWallet(outputPath);
+  });
+
+program
+  .command("recover-wallet <mnemonic> [output-path]")
+  .description("Recover a wallet from a mnemonic phrase")
+  .action((mnemonic, outputPath = "recovered-wallet-secret.json") => {
+    const seed = bip39.mnemonicToSeedSync(mnemonic);
+    const keypair = Keypair.fromSeed(seed.slice(0, 32));
+    fs.writeFileSync(outputPath, JSON.stringify(Array.from(keypair.secretKey)));
+    console.log(`Wallet recovered successfully!`);
+    console.log(`Public key: ${keypair.publicKey.toString()}`);
+    console.log(`Secret key saved to: ${outputPath}`);
   });
 
 const walletCommands = program
@@ -134,6 +161,27 @@ walletCommands
       console.log(`New balance: ${balance} SOL`);
     } catch (error) {
       console.error("Airdrop failed:", error);
+    }
+  });
+
+walletCommands
+  .command("history")
+  .description("Get transactions history")
+  .action(async () => {
+    const wallet = new SolanaWallet(walletCommands.opts().key);
+    try {
+      const transactions = await wallet.getTransactionHistory();
+      console.log("Transaction History:");
+      transactions.forEach((tx, index) => {
+        console.log(`${index + 1}. Signature: ${tx.transaction.signatures[0]}`);
+        console.log(`   Status: ${tx.meta?.err ? "Failed" : "Success"}`);
+        console.log(
+          `   Block Time: ${new Date(tx.blockTime! * 1000).toLocaleString()}`
+        );
+        console.log("---");
+      });
+    } catch (error) {
+      console.error("Failed to fetch transaction history:", error);
     }
   });
 
