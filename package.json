@@ -1,7 +1,9 @@
 {
   "name": "solanaswift",
+  "version": "1.0.0",
   "module": "index.ts",
   "type": "module",
+  "bin":"index.ts"
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -10,8 +12,28 @@
   },
   "dependencies": {
     "@solana/web3.js": "^1.95.1",
-    "@types/node": "^20.14.12",
+    "@types/node": "^22.0.0",
+    "bip39": "^3.1.0",
     "commander": "^12.1.0",
     "ts-node": "^10.9.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4rjunc/SolanaSwift.git"
+  },
+  "bugs": {
+    "url": "https://github.com/4rjunc/SolanaSwift/issues"
+  },
+  "homepage": "https://github.com/4rjunc/SolanaSwift#readme",
+  "bin": "index.ts",
+  "keywords": [
+    "cli",
+    "solana",
+    "solana-wallet",
+    "sol",
+    "bitcoin",
+    "web3"
+  ],
+  "author": "4rjunc",
+  "license": "MIT"
 }
