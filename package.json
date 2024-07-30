@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "module": "index.ts",
   "type": "module",
-  "bin":"index.ts"
+  "bin":"index.ts",
   "devDependencies": {
     "@types/bun": "latest"
   },
