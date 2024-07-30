@@ -1,5 +1,3 @@
-#!/usr/bin/env ts-node
-
 import {
   Connection,
   PublicKey,
