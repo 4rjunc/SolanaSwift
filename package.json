@@ -25,7 +25,6 @@
     "url": "https://github.com/4rjunc/SolanaSwift/issues"
   },
   "homepage": "https://github.com/4rjunc/SolanaSwift#readme",
-  "bin": "index.ts",
   "keywords": [
     "cli",
     "solana",
