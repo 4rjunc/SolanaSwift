@@ -1,6 +1,6 @@
 {
   "name": "solanaswift",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "cli wallet for solana",
   "module": "index.ts",
   "type": "module",
