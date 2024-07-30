@@ -12,6 +12,7 @@ import {
 import { program } from "commander";
 import * as fs from "fs";
 import * as bip39 from "bip39";
+import * as figlet from "figlet"
 
 const SOLANA_NETWORK = "https://api.devnet.solana.com";
 
@@ -87,6 +88,8 @@ function createWallet(outputPath: string): void {
   console.log(`Secret key saved to: ${outputPath}`);
   console.log(`Mnemonic (keep this safe!): ${mnemonic}`);
 }
+
+console.log(figlet.textSync("SolanaSwift"));
 
 program
   .version("1.0.0")

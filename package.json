@@ -3,18 +3,26 @@
   "version": "1.0.3",
   "module": "index.ts",
   "type": "module",
-  "bin": "index.ts",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "bin": {
+    "solanaswift": "./dist/index.js"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/figlet": "^1.5.8",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.4"
   },
   "peerDependencies": {
     "typescript": "^5.5.4"
   },
   "dependencies": {
     "@solana/web3.js": "^1.95.1",
-    "@types/node": "^22.0.0",
     "bip39": "^3.1.0",
     "commander": "^12.1.0",
+    "figlet": "^1.7.0",
     "ts-node": "^10.9.2"
   },
   "repository": {
