@@ -1,8 +1,9 @@
 {
   "name": "solanaswift",
-  "version": "1.0.5",
+  "version": "1.0.7",
+ "type": "module",
+  "main": "./dist/index.js",
   "description": "cli wallet for solana",
-  "module": "index.ts",
   "scripts": {
     "build": "npx tsc"
   },
