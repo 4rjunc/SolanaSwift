@@ -2,6 +2,12 @@
 
 SolanaSwift is a quick and efficient Solana wallet CLI tool for managing Solana transactions on the devnet.
 
+## Install tool from NPM
+
+    ```
+    npm i -g solanawallet   
+    ```
+
 ## Features 🌟
 
 - Create new wallets
@@ -9,6 +15,8 @@ SolanaSwift is a quick and efficient Solana wallet CLI tool for managing Solana 
 - Transfer SOL between wallets
 - Request airdrops (on devnet)
 - Get wallet address for receiving SOL
+- Recover wallet using mnemonic phrase
+- Get transactions history
 
 ## Installation 🛠️
 
@@ -31,10 +39,21 @@ SolanaSwift is a quick and efficient Solana wallet CLI tool for managing Solana 
 Create a new wallet and save the secret key to a file:
 
 ```
-bun run solana-wallet.ts create-wallet [output-path]
+bun index.ts create-wallet [output-path]
 ```
 
 - `[output-path]`: Optional. Path to save the wallet secret key (default: `wallet-secret.json`)
+- **MAKE SURE YOU SAVE YOU MNEMONIC PHRASE**
+
+### Recover Wallet 🏥
+
+You can recover the wallet using:
+
+```
+bun index.ts recover-wallet "your mnemonic phrase here" [output-path]
+```
+
+- `[output-path]`: Optional. Path to save the recovered wallet secret key (default: `recovered-wallet-secret.json`)
 
 ### Wallet Operations 💼
 
@@ -45,7 +64,7 @@ All wallet operations require the `-k` option to specify the path to your wallet
 Get the balance of your wallet:
 
 ```
-bun run solana-wallet.ts wallet -k <path-to-secret-key> balance
+bun index.ts wallet -k <path-to-secret-key> balance
 ```
 
 #### Transfer SOL 💸
@@ -53,7 +72,7 @@ bun run solana-wallet.ts wallet -k <path-to-secret-key> balance
 Transfer SOL to another address:
 
 ```
-bun run solana-wallet.ts wallet -k <path-to-secret-key> transfer <recipient-address> <amount>
+bun index.ts wallet -k <path-to-secret-key> transfer <recipient-address> <amount>
 ```
 
 - `<recipient-address>`: The public key of the recipient's wallet
@@ -64,7 +83,7 @@ bun run solana-wallet.ts wallet -k <path-to-secret-key> transfer <recipient-addr
 Display the public address of your wallet:
 
 ```
-bun run solana-wallet.ts wallet -k <path-to-secret-key> address
+bun index.ts wallet -k <path-to-secret-key> address
 ```
 
 #### Request Airdrop 🪂
@@ -72,7 +91,17 @@ bun run solana-wallet.ts wallet -k <path-to-secret-key> address
 Request an airdrop of SOL tokens from the devnet faucet:
 
 ```
-bun run solana-wallet.ts wallet -k <path-to-secret-key> airdrop <amount>
+bun index.ts wallet -k <path-to-secret-key> airdrop <amount>
+```
+
+- `<amount>`: The amount of SOL to request (subject to devnet limitations)
+
+#### Transaction History 📝
+
+Get your transactions history :
+
+```
+bun index.ts walletk -k <path-to-secret-key> history
 ```
 
 - `<amount>`: The amount of SOL to request (subject to devnet limitations)
@@ -85,7 +114,7 @@ bun run solana-wallet.ts wallet -k <path-to-secret-key> airdrop <amount>
 
 ## Contributing 🤝
 
-Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/yourusername/solanaswift/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/4rjun/SolanaSwift/issues).
 
 ## License 📄
 
