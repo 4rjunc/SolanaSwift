@@ -2,11 +2,12 @@
 
 SolanaSwift is a quick and efficient Solana wallet CLI tool for managing Solana transactions on the devnet.
 
-## Install tool from NPM 👀
+## Install tool from NPM 👀:
 
-    ```
-    npm i -g solanawallet
-    ```
+- Install cli tool using:
+  ```
+  npm i -g solanawallet
+  ```
 
 ## Features 🌟
 
