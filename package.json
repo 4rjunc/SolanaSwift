@@ -1,14 +1,14 @@
 {
   "name": "solanaswift",
-  "version": "1.0.7",
- "type": "module",
-  "main": "./dist/index.js",
+  "version": "1.0.8",
+  "type": "commonjs",
+  "main": "dist/index.cjs",
   "description": "cli wallet for solana",
   "scripts": {
     "build": "npx tsc"
   },
   "bin": {
-    "solanaswift": "./dist/index.js"
+    "solanaswift": "./dist/index.cjs"
   },
   "devDependencies": {
     "@types/bun": "latest",
