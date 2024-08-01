@@ -6,7 +6,7 @@ SolanaSwift is a quick and efficient Solana wallet CLI tool for managing Solana 
 
 - Install cli tool using:
   ```
-  npm i -g solanawallet
+  npx i solanawallet
   ```
 
 ## Features 🌟
@@ -106,6 +106,12 @@ bun index.ts walletk -k <path-to-secret-key> history
 ```
 
 - `<amount>`: The amount of SOL to request (subject to devnet limitations)
+
+## To Build
+
+```
+bun run build index.ts
+```
 
 ## Important Notes ⚠️
 
